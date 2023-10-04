@@ -1,0 +1,203 @@
+@charset "UTF-8";
+
+
+#header {
+  font-family:Verdana;
+  background-color: rgb(98, 117, 132);
+  color:rgb(184, 187, 190) ;
+  display: flex;
+  flex:1;
+  flex-direction:row;
+  justify-content: space-between;
+  align-items:center;
+ 
+  /*height: auto;
+  margin: 0;*/
+}
+
+
+h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+h2 {
+  font-size: 18px;
+  margin: 20px;
+}
+
+/*.categoryTitle {
+  display: flex;
+  flex-direction: column;
+}*/
+
+#numberOne.divImage {
+  flex: 1;
+  justify-content: center;
+  align-items:baseline;  
+}
+
+#section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.categoryTitle {
+  display: flex;
+  flex-direction: column;
+  }
+
+.containerimages {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  border: 1px solid #220303;
+}
+
+.divImage {
+  flex: 1;
+  max-width: 100%; /* Largeur totale de la fenêtre */
+  height: auto; /* Hauteur totale de la fenêtre */
+  display: inline-flex;
+  //justify-content:center; /* Centrer horizontalement */
+  background-size:cover;
+  align-items:center; /* Centrer verticalement */
+  margin:0;
+}
+
+.divImage img {
+  width: 100%;
+  height: auto;
+}
+
+img {
+  width: 364 px;
+  height: 536 px;
+}
+/*******************************************************/
+/*           Gestion des fenêtres modales              */
+/*******************************************************/
+
+.image-modal-trigger {
+  cursor: pointer;
+  max-width: 90%;
+  transition: opacity 0.3s;
+}
+
+.image-modal-trigger:hover {
+  opacity: 0.6;
+}
+
+/* Style pour la boîte modale, cachée au départ */
+.modal {
+  display: none;
+  position:fixed;
+  top: center;
+  left: center;
+  width: 70%;
+  height: 70%;
+  background-color: rgba(147, 201, 235, 0.645);
+  z-index: 1;
+  align-items: center;
+}
+
+/* Style pour le contenu de la fenêtre modal cachée par défaut */
+
+.modal ul {
+  position:fixed;
+  margin-left: 20px; /* Ajoutez une marge à gauche pour séparer l'image de la liste */
+  padding: 0; /* Supprimez le padding par défaut de la liste */
+  list-style: none; /* Supprimez les puces de la liste */
+}
+
+.li {
+margin-bottom: 5px;
+}
+/* Bouton de fermeture de la modale */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 30px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: red;
+}
+
+
+
+#section > .numberOne {
+  order: 1;
+}
+
+#section > .bestFilms {
+  order: 2;
+}
+
+#section > .Biography {
+  order: 4;
+}
+
+#section > .Adventure {
+  order: 4;
+}
+
+#section > .Sport {
+  order: 5;
+}
+
+.footer {
+  height: 30px;
+}
+
+/* Carrousel */
+
+#carrousel {
+  width:800px;
+  height:400px;
+  border:solid 2px #fff;
+  box-shadow:0 0 14px rgba(0,0,0,0.3);
+  position:relative;
+}
+
+#carrouselContainer {
+  width:800px;
+  height:400px;
+}
+
+.button {
+  position:absolute;
+  width:40px;
+  cursor:pointer;
+  top:170px;
+}
+
+#leftButton{
+  left:0;
+  opacity:0.5;
+  transform:rotate(90deg);
+  transition:all 0,4s;
+}
+
+#rightButton{
+  right:0;
+  opacity:0.5;
+  transform:rotate(270deg);
+  transition:all 0,4s;
+}
+
+#leftButton:hover{
+  transform:rotate(90deg) scale(1.2);
+  transition:all 0,4s;
+  opacity:1;
+}
+
+#rightButton:hover{
+  transform:rotate(270deg) scale(1.2);
+  transition:all 0,4s;
+  opacity:1;
+}

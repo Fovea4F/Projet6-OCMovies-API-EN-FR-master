@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JustStream-ORI</title>
+    <!-- Inclusion du fichier css pour le style du jeu -->
+    <link rel="stylesheet" href="style/style.css">
+
+    <!-- Inclusion des 3 scripts nécessaires pour faire fonctionner le jeu -->
+    <!-- Attention, l'ordre des fichiers js est important.  -->
+    <!--<script src="./config.js" defer></script>
+    <script src="./popup.js" defer></script>
+    <script src="./main.js" defer></script>
+    <script src="./script.js" defer></script>-->
+    <script src="./juststreamit.js" defer></script>
+
+</head>
+<body>
+    <header id="header" class="header">
+        <div id="title" >
+            <h1>JustStreamIt</h1>
+            <div class="rubrique">Accueil</div>
+            <div class="rubrique">Catégories</div>
+        </div>
+    </header>
+
+    <!-- Boîte modale cachée initialement -->
+    <div class="modal" id="image-modal">
+        <span class="close" id="close-modal">&times;</span>
+        <img src="" alt="Image" id="modal-image">
+    </div>
+
+    <!--Carrousel-->
+    <div id="carrousel">
+        <div id="carrouselContainer"></div>
+        <img src="images/chevron.png" class="button" alt="right button - Image PNG de fr.pngtree.com" id="rightButton"/>
+        <img src="images/chevron.png" class="button" alt="left button - Image PNG de fr.pngtree.com" id="leftButton"/>
+    </div>
+
+    <!-- MAIN -->
+
+    <section id="section">
+        <!--<sectionleft id="leftsection" class="leftsection">
+        </sectionleft>-->
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="footer">
+        @Copyright : Openclassrooms. 
+    </footer>
+</body>
+</html>
