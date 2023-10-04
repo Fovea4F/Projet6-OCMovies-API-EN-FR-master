@@ -68,9 +68,11 @@ function afficherImage(categoryFilms, filmData=[]) {
         switch (categoryFilms) {
             case 'numberOne':
                 title.textContent = 'Meilleur film !';
+                title.attributeStyleMap="order: 1;"
                 break;
             case 'bestFilms':
                 title.textContent = 'Films les mieux notés';
+                title.attributeStyleMap="order: 2;"
                 break;
             default:
                 title.textContent = `Catégorie : ${categoryFilms}`;
@@ -85,11 +87,13 @@ function afficherImage(categoryFilms, filmData=[]) {
         button.src="images/chevron.png";
         button.alt="right button - Image PNG de fr.pngtree.com";
         button.classList.add("button");
+        button.classList.add("overlay");
         button.id="rightButton";
         divContainerImages.appendChild(button);
         button = document.createElement('img');
         button.src="images/chevron.png";
         button.classList.add("button");
+        button.classList.add("overlay");
         button.alt="left button - Image PNG de fr.pngtree.com";
         button.id="leftButton";
         divContainerImages.appendChild(button);
@@ -98,7 +102,7 @@ function afficherImage(categoryFilms, filmData=[]) {
     let divParent = document.getElementById(categoryFilms);
     //Div creation and image add
     let imageNewDiv = document.createElement('div');
-    imageNewDiv.classList.add('divImage');            
+    imageNewDiv.classList.add('divImage');
     let image = document.createElement('img');
     image.src = filmData.image_url;
     image.id = filmData.id;

@@ -24,75 +24,72 @@ h2{
   margin: 0;*/
 }
 
-#section{
-  /*display: flex;
-  flex-direction: column;*/
+/*#section{
+  display: flex;
+  flex-direction: column;
   width: 100%;
+}*/
+
+.categoryTitle {
+  display: flex;
+  flex-direction: column;
 }
 
-/*.categoryTitle{
-  display:flow-root;
+/*#numberOne{
+  order
+  order: 1;
 }*/
 
 .containerimages{
-  display: inline-block;
-  height: 268px;
+  display: flex;
+  flex-direction: row;
   width: 728px;
+  height: 268px;
   border: 1px solid #220303;
+  margin: 0;
+  overflow:hidden;
 }
 
 .divImage{
-  display: inline-block;
-  width: 182px;
-  height: 268px;
+  /*display: inline-block;*/
+  /*width: 182px;
+  height: 268px;*/
   /*justify-content:center; /* Centrer horizontalement */
   background-size: cover;
-  align-items: stretch; /* Centrer verticalement */
-  margin: 0;
+  /*align-items: stretch; /* Centrer verticalement */
+  /*margin: 0;*/
 }
 
 .photo{
-  display: inline-block;
-  height: 182px;
+  /*display: inline-block;*/
+  width: 182px;
   height: 268px;
   margin: 0;
-  background-size: cover;
+  /*background-size: cover;*/
 }
 
-/*#numberOne.divImage {
+#numberOne.divImage {
   flex: 1;
   justify-content: center;
   align-items:baseline;
-}*/
-
-#section > .numberOne{
-  order: 1;
 }
 
-#section > .bestFilms{
+
+#section.bestFilms{
   order: 2;
 }
 
-#section > .Biography{
+#section.Biography{
   order: 3;
 }
 
-#section > .Adventure{
+#section.Adventure{
   order: 4;
 }
 
-#section > .Sport{
+#section.Sport{
   order: 5;
 }
-/*.categoryTitle {
-  display: flex;
-  flex-direction: column;
-}*/
-
-/*.categoryTitle {
-  display: flex;
-  flex-direction: column;
-  }*/
 
 /*******************************************************/
 /*           Gestion des fenêtres modales              */
@@ -148,13 +145,6 @@ margin-bottom:5px;
   color:red;
 }
 
-
-
-
-.footer{
-  height:30px;
-}
-
 /* Carrousel */
 
 #carrousel{
@@ -166,27 +156,28 @@ margin-bottom:5px;
 }
 
 #carrouselContainer{
+  align-items: center;
   width:728px;
   height:400px;
 }
 
 .button{
-  position:absolute;
+  position:relative;
+  height: 50px;
   width:50px;
   cursor:pointer;
   top:100px;
 }
 
-
 #leftButton{
-  left:0;
+  margin-right:10px;
   opacity:0.5;
   transform:rotate(90deg);
   transition:all 0,4s;
 }
 
 #rightButton{
-  right:0;
+  margin-left: 10px;
   opacity:0.5;
   transform:rotate(270deg);
   transition:all 0,4s;
@@ -202,4 +193,8 @@ margin-bottom:5px;
   transform:rotate(270deg) scale(1.2);
   transition:all 0,4s;
   opacity:1;
+}
+
+.footer{
+  height:30px;
 }
