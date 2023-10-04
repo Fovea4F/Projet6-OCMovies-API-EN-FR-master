@@ -12,7 +12,6 @@ sortTitle = '-imdb_score';
 /*****************************************************************************/
 /* Sélectionnez tous les éléments avec la classe "image-modal-trigger"       */
 /*****************************************************************************/
-/*const imageModalTriggers = document.querySelectorAll(".image-modal-trigger");*/
 // Sélectionnez l'élément de la boîte modale
 
 /*****************************************************************************/
@@ -30,13 +29,13 @@ function createInformationList(imageInformation, filmData) {
     //prepare list information to display in Modal Windows
     imageInformation.id = 'imageInfo';
     let informationList = [];
-    informationList.push(["Titre du film     : ", filmData.title]);
-    informationList.push(["Genre             : ", filmData.genres]);
-    informationList.push(["Année de sortie   : ", filmData.year]);
-    informationList.push(["Nombre de votes   : ", filmData.votes]);
-    informationList.push(["Score imdb        : ", filmData.imdb_score]);
-    informationList.push(["Réalisateur       : ", filmData.directors]);
-    informationList.push(["Liste des acteurs : ", filmData.actors]);
+    informationList.push([`Titre du film     :  ${filmData.title}`]);
+    informationList.push([`Genre             :  ${filmData.genres}`]);
+    informationList.push([`Année de sortie   :  ${filmData.year}`]);
+    informationList.push([`Nombre de votes   :  ${filmData.votes}`]);
+    informationList.push([`Score imdb        :  ${filmData.imdb_score}`]);
+    informationList.push([`Réalisateur       :  ${filmData.directors}`]);
+    informationList.push([`Liste des acteurs :  ${filmData.actors}`]);
     return informationList;
 };
 
@@ -61,10 +60,10 @@ function afficherImage(categoryFilms, filmData=[]) {
     if (document.getElementById(categoryFilms) == null) {
         //let divGlobal = document.getElementById("leftsection");
         let divSection = document.getElementById('section')
-        let divParent = document.createElement('div');
-        divSection.appendChild(divParent);
-        divParent.classList.add("categoryTitle")
-        divParent.classList.add(categoryFilms);
+        let divCategoryTitle = document.createElement('div');
+        divSection.appendChild(divCategoryTitle);
+        divCategoryTitle.classList.add("categoryTitle")
+        divCategoryTitle.classList.add(categoryFilms);
         let title = document.createElement('h2');
         switch (categoryFilms) {
             case 'numberOne':
@@ -76,11 +75,25 @@ function afficherImage(categoryFilms, filmData=[]) {
             default:
                 title.textContent = `Catégorie : ${categoryFilms}`;
         }
-        divParent.appendChild(title);
-        let divCategory = document.createElement('div');
-        divCategory.setAttribute("id", categoryFilms);
-        divCategory.classList.add('containerimages');
-        divParent.appendChild(divCategory);
+        divCategoryTitle.appendChild(title);
+        let divContainerImages = document.createElement('div');
+        divContainerImages.setAttribute("id", categoryFilms);
+        divContainerImages.classList.add('containerimages');
+        divContainerImages.classList.add('carrouselContainer');
+        //Add buttons for Carrousel
+        let button = document.createElement('img');
+        button.src="images/chevron.png";
+        button.alt="right button - Image PNG de fr.pngtree.com";
+        button.classList.add("button");
+        button.id="rightButton";
+        divContainerImages.appendChild(button);
+        button = document.createElement('img');
+        button.src="images/chevron.png";
+        button.classList.add("button");
+        button.alt="left button - Image PNG de fr.pngtree.com";
+        button.id="leftButton";
+        divContainerImages.appendChild(button);
+        divCategoryTitle.appendChild(divContainerImages);
     }    
     let divParent = document.getElementById(categoryFilms);
     //Div creation and image add
@@ -90,7 +103,7 @@ function afficherImage(categoryFilms, filmData=[]) {
     image.src = filmData.image_url;
     image.id = filmData.id;
     image.alt = `Titre du livre : ${filmData.title}`;
-    image.classList.add('image-modal-trigger')
+    image.classList.add('photo');
     image.onerror = function() {
         image.src = "images/buildings.jpg";
         image.alt = `Titre du livre : ${filmData.title}`;
@@ -108,13 +121,14 @@ function afficherImage(categoryFilms, filmData=[]) {
             }
         }
         modalImage.setAttribute("src", image.src);
-        modalImage.setAttribute("alt", image.alt);
+        modalImage.setAttribute("alt", image.alt);    
         for (index = 0; index<informationList.length; index++) {
             dataElement = document.createElement('li');
             dataElement.textContent = informationList[index];
             imageInformation.appendChild(dataElement);
         };                  
         imageModal.appendChild(imageInformation);
+        imageModal.classList.add('image-modal-trigger')
         imageModal.style.display = "block"; // Affichez la boîte modale
         console.log("Triggers");
         // Modal Events close actions
