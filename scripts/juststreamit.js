@@ -5,7 +5,7 @@ urlHref = "http://127.0.0.1:8000";
 genresPathEndPoint = "/api/v1/genres/";
 titlesPathEndPoint = "/api/v1/titles/";
 titlesSort = "-imdb_score";
-categoryList = ['Biography', 'Sport', 'Adventure'];
+categoryList = ['numberOne', 'bestFilms', 'Biography', 'Sport', 'Adventure'];
 numberOfFilms = 7;
 sortTitle = '-imdb_score';
 
@@ -15,15 +15,6 @@ sortTitle = '-imdb_score';
 // Sélectionnez l'élément de la boîte modale
 
 /*****************************************************************************/
-const bouton = document.getElementById("mon-bouton");
-
-// Fonctions de traitement de l'application et affichage
-
-function displayDefaultImage() {
-    //used to display default image when no image is found
-    let image = document.getElementById('img');
-    image.src = "images/buildings.jpg";
-}
 
 function createInformationList(imageInformation, filmData) {
     //prepare list information to display in Modal Windows
@@ -49,71 +40,131 @@ function modalClose(modalImage, imageModal) {
     imageModal.style.display = "none"; // Masquez la fenêtre modale
 };
 
-function afficherImage(categoryFilms, filmData=[]) {
-    //create a div to display image film, get data to exploit in modal view
+function addButtons(category) {
+    //Add buttons for Carrousel
 
-    const imageModal = document.getElementById("image-modal"); //Select Div Modal
-    const modalImage = document.getElementById("modal-image"); //Select image inside Modal
-    //const closeModal = document.getElementById("close-modal"); // Select Modal close access       
+    if (category == 'numberOne') {
+        return;
+    }
+        let divCarrousel = document.getElementById(`carrousel${category}`);
+    //console.log('passage par ajout bouton');
+    let rightButton = document.createElement('img');
+    rightButton.src="images/icons8-chevron-droit-48.png";
+    rightButton.alt="right button - Image de icon8.com";
+    rightButton.classList.add("rightButton");
+    rightButton.classList.add("button");
+    rightButton.classList.add("overlay");
+    rightButton.id=`rightButton${category}`;
+    divCarrousel.appendChild(rightButton);
+    let leftButton = document.createElement('img');
+    leftButton.src="images/icons8-chevron-gauche-48.png";
+    leftButton.alt="left button - Image de icon8.com";
+    leftButton.classList.add(`leftButton`);
+    leftButton.classList.add("button");
+    leftButton.classList.add("overlay");
+    leftButton.id=`leftButton${category}`;
+    divCarrousel.appendChild(leftButton);
+};
 
-    //console.log(`category: ${categoryFilms} filmData : `,filmData);
-    if (document.getElementById(categoryFilms) == null) {
+function createCarrouselDiv(categoryFilms) {
+
+    if (document.getElementById(`carrousel${categoryFilms}`) == null) {
         //let divGlobal = document.getElementById("leftsection");
-        let divSection = document.getElementById('section')
-        let divCategoryTitle = document.createElement('div');
-        divSection.appendChild(divCategoryTitle);
-        divCategoryTitle.classList.add("categoryTitle")
-        divCategoryTitle.classList.add(categoryFilms);
+        let divSection = document.getElementById('section');
+        let divCarrousel = document.createElement(`div`);
+        divSection.appendChild(divCarrousel);
+        divCarrousel.id = `carrousel${categoryFilms}`;
+        divCarrousel.classList.add("categoryTitle");
+        divCarrousel.classList.add(categoryFilms);
+        divCarrousel.setAttribute('position', 0);
+        divCarrousel.setAttribute('imageNumber', 7);
+        divCarrousel.style.width=`${(182*4)}px`;        
         let title = document.createElement('h2');
         switch (categoryFilms) {
             case 'numberOne':
                 title.textContent = 'Meilleur film !';
-                title.attributeStyleMap="order: 1;"
+                divCarrousel.setAttribute('order', 1);
                 break;
             case 'bestFilms':
                 title.textContent = 'Films les mieux notés';
-                title.attributeStyleMap="order: 2;"
+                divCarrousel.setAttribute('order', 2);
                 break;
             default:
                 title.textContent = `Catégorie : ${categoryFilms}`;
-        }
-        divCategoryTitle.appendChild(title);
-        let divContainerImages = document.createElement('div');
-        divContainerImages.setAttribute("id", categoryFilms);
-        divContainerImages.classList.add('containerimages');
-        divContainerImages.classList.add('carrouselContainer');
-        //Add buttons for Carrousel
-        let button = document.createElement('img');
-        button.src="images/chevron.png";
-        button.alt="right button - Image PNG de fr.pngtree.com";
-        button.classList.add("button");
-        button.classList.add("overlay");
-        button.id="rightButton";
-        divContainerImages.appendChild(button);
-        button = document.createElement('img');
-        button.src="images/chevron.png";
-        button.classList.add("button");
-        button.classList.add("overlay");
-        button.alt="left button - Image PNG de fr.pngtree.com";
-        button.id="leftButton";
-        divContainerImages.appendChild(button);
-        divCategoryTitle.appendChild(divContainerImages);
-    }    
-    let divParent = document.getElementById(categoryFilms);
+                divCarrousel.setAttribute('order', 'unset');
+        };
+        divCarrousel.appendChild(title);
+        addButtons(categoryFilms);
+    };
+};
+
+function createContainerDiv(categoryFilms) {
+    // create div container that will host images of a category 
+    let divContainerImages = document.createElement('div');
+    divContainerImages.id = `container${categoryFilms}`;
+    divContainerImages.classList.add('containerimages');
+    //adjust width of container window to width of total images
+    divContainerImages.style.width=`${(182*7)}px`;
+    let divCarrousel = document.getElementById(`carrousel${categoryFilms}`);
+    divCarrousel.appendChild(divContainerImages);
+
+    divCarrousel = document.getElementById(`carrousel${categoryFilms}`);
+    let leftButton = document.getElementById(`leftButton${categoryFilms}`);
+    let rightButton = document.getElementById(`rightButton${categoryFilms}`);
+    let position = divCarrousel.getAttribute('position');
+    let numberImage = divCarrousel.getAttribute('imageNumber');
+    leftButton.addEventListener('click', function() {
+        if (position > -numberImage+4) {
+        position--;
+        divContainerImages.style.transform=`translate(${position*182}px)`;
+    };
+    });
+    rightButton.addEventListener('click', () => {
+        if (position < 0) {
+        position++;
+        divContainerImages.style.transform=`translate(${position*182}px)`;
+    };
+    });
+
+};
+
+function displayImage(categoryFilms, filmData=[]) {
+    //create a div to display image film, get data to exploit in modal view
+
+    const imageModal = document.getElementById("image-modal"); //Select Div Modal
+    const modalImage = document.getElementById("modal-image"); //Select image inside Modal   
+
+    //console.log(`category: ${categoryFilms} filmData : `,filmData);
+    if (document.getElementById(`carrousel${categoryFilms}`) == null) {
+        createCarrouselDiv(categoryFilms);
+    };
+    if (document.getElementById(`container${categoryFilms}`) == null) {
+        createContainerDiv(categoryFilms);
+    };
+    let divContainerImages = document.getElementById(`container${categoryFilms}`);
     //Div creation and image add
     let imageNewDiv = document.createElement('div');
     imageNewDiv.classList.add('divImage');
+    backGroundImage = filmData.image_url;
+    imageNewDiv.classList.add('imageToDisplay');
+    /*imageNewDiv.textContent = backGroundImage;
+    imageNewDiv.style.backgroundImage = imageNewDiv.textContent
+    */
     let image = document.createElement('img');
     image.src = filmData.image_url;
     image.id = filmData.id;
     image.alt = `Titre du livre : ${filmData.title}`;
     image.classList.add('photo');
-    image.onerror = function() {
+    //console.log('filmData :', filmData);
+    image.onload = () => {
+        imageNewDiv.style.backgroundImage = `url(${image.src})`;  
+    };
+    image.onerror = () => {
         image.src = "images/buildings.jpg";
         image.alt = `Titre du livre : ${filmData.title}`;
     };
     /*Modal Event actions*/
-    image.addEventListener("click", () => {
+    imageNewDiv.addEventListener("click", () => {
         //Modal windows data creation and open actions
         let imageInformation = document.createElement('ul');
         informationList = createInformationList(imageInformation, filmData);
@@ -122,8 +173,8 @@ function afficherImage(categoryFilms, filmData=[]) {
         if (elementUl != null) {
             for (index = 0; index < elementUl.length; index++) {
                 imageModal.removeChild(elementUl);
-            }
-        }
+            };
+        };
         modalImage.setAttribute("src", image.src);
         modalImage.setAttribute("alt", image.alt);    
         for (index = 0; index<informationList.length; index++) {
@@ -132,7 +183,7 @@ function afficherImage(categoryFilms, filmData=[]) {
             imageInformation.appendChild(dataElement);
         };                  
         imageModal.appendChild(imageInformation);
-        imageModal.classList.add('image-modal-trigger')
+        imageModal.classList.add('image-modal-trigger');
         imageModal.style.display = "block"; // Affichez la boîte modale
         console.log("Triggers");
         // Modal Events close actions
@@ -145,12 +196,13 @@ function afficherImage(categoryFilms, filmData=[]) {
         window.addEventListener("click", (event) => {
             if (event.target === imageModal) {
                 modalClose(modalImage, imageModal);
-            }
+            };
         });
     });
-imageNewDiv.appendChild(image);
-divParent.appendChild(imageNewDiv);
+    divContainerImages.appendChild(imageNewDiv);
 };
+
+
 
 async function getData(url) {
     try {
@@ -162,48 +214,50 @@ async function getData(url) {
         return jsonData;
     } catch (error) {
         console.error(`Accès aux données impossible : ${error}`);
-    }
-}
+    };
+};
 
 let url = `${urlHref}${titlesPathEndPoint}?sort_by=-imdb_score`;
-let bestFilms = getData(url);
-bestFilms.then((jsonData) => {
+// utl points films, ordered by imdb_score ("the most viewed")
+let bestFilm = getData(url);
+bestFilm.then((jsonData) => {
     //console.log(jsonData.results);
     let nextUrl = jsonData.next;
     let dataArray = jsonData.results;
-    afficherImage('numberOne', dataArray[0]);
+    displayImage('numberOne', dataArray[0]);
     for (index = 1; index < dataArray.length; index++) {
-        afficherImage('bestFilms', dataArray[index]);
-    }
-    let bestFilms = getData(nextUrl);
-    bestFilms.then((jsonData) => {
+        displayImage('bestFilms', dataArray[index]);
+    };
+    let bestFilm = getData(nextUrl);
+    bestFilm.then((jsonData) => {
         //console.log(jsonData.results);
         let dataArray = jsonData.results;
         for (index = 0; index < numberOfFilms-4; index++) {
-            afficherImage('bestFilms', dataArray[index])
-        }
-    })
-})
+            displayImage('bestFilms', dataArray[index]);
+        };
+    //addButtons('bestFilms');
+    });
+});
 
-for (cat in categoryList) {
-    let category = categoryList[cat];
+for (index = 2; index < categoryList.length; index++) {
+    let category = categoryList[index];
     let url = `${urlHref}${titlesPathEndPoint}?genre=${category}&sort_by=-imdb_score`;
-    let bestFilms = getData(url);
+    let film = getData(url);
     //console.log('bestFilms : ',bestFilms)
-    bestFilms.then((jsonData) => {
+    film.then((jsonData) => {
         let nextUrl = jsonData.next;
         let dataArray = jsonData.results;
         //console.log('jsonData',  dataArray);
         for (index = 0; index < dataArray.length; index++) {
-            afficherImage(category, dataArray[index]);
+            displayImage(category, dataArray[index]);
         }
-        let bestFilms = getData(nextUrl);
-        bestFilms.then((jsonData) => {
+        let film = getData(nextUrl);
+        film.then((jsonData) => {
             dataArray = jsonData.results;
             for (index = 0; index < numberOfFilms-5; index++) {
-                afficherImage(category, dataArray[index]);1
-            }
-        })
-    })
-}
-
+                displayImage(category, dataArray[index]);
+            };
+        //addButtons(category);
+        });
+    });
+};

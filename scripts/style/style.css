@@ -24,72 +24,68 @@ h2{
   margin: 0;*/
 }
 
-/*#section{
+#section{
   display: flex;
   flex-direction: column;
   width: 100%;
-}*/
+}
 
 .categoryTitle {
   display: flex;
   flex-direction: column;
+  position:relative;
+  align-items: flex-start;
+  overflow: hidden;
 }
-
-/*#numberOne{
-  order
-  order: 1;
-}*/
 
 .containerimages{
   display: flex;
   flex-direction: row;
   width: 728px;
   height: 268px;
-  border: 1px solid #220303;
-  margin: 0;
-  overflow:hidden;
+  /*border: 1px solid #220303;*/
+  margin: 1px;
+  /*overflow:hidden;
+  border:solid 4px #470606;
+  box-shadow: 0 0 12px rgba(0,0,0,0.2);*/
 }
 
-.divImage{
-  /*display: inline-block;*/
-  /*width: 182px;
-  height: 268px;*/
-  /*justify-content:center; /* Centrer horizontalement */
-  background-size: cover;
-  /*align-items: stretch; /* Centrer verticalement */
-  /*margin: 0;*/
-}
-
-.photo{
-  /*display: inline-block;*/
+/*.divImage{
+  /*display: inline-block;
   width: 182px;
   height: 268px;
+  justify-content:center; /* Centrer horizontalement 
+  background-size: cover;
+  align-items: stretch; /* Centrer verticalement 
   margin: 0;
-  /*background-size: cover;*/
-}
+}*/
 
-#numberOne.divImage {
+.imageToDisplay{
+  margin:0;
+  display: inline-block;
+  width: 182px;
+  height: 268px;
+  overflow:visible;
+  background-size: cover;
+}
+/*.imageToDisplay{
+  background-image: inherit;
+}*/
+
+/*#numberOne.divImage {
   flex: 1;
   justify-content: center;
   align-items:baseline;
+}*/
+
+
+/*#carrouselnumberOne{
+  order: 1;
 }
 
-
-#section.bestFilms{
+#carrouselbestFilms{
   order: 2;
-}
-
-#section.Biography{
-  order: 3;
-}
-
-#section.Adventure{
-  order: 4;
-}
-
-#section.Sport{
-  order: 5;
-}
+}*/
 
 /*******************************************************/
 /*           Gestion des fenêtres modales              */
@@ -132,69 +128,66 @@ margin-bottom:5px;
 }
 
 /* Bouton de fermeture de la modale */
-.close{
-  position:absolute;
-  top:10px;
-  right:15px;
-  font-size:30px;
-  color:#fff;
-  cursor:pointer;
+.closeButton{
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 30px;
+  color: #fff;
+  cursor: pointer;
 }
 
-.close:hover{
+.closeButton:hover{
   color:red;
 }
 
 /* Carrousel */
 
 #carrousel{
-  width:800px;
-  height:400px;
-  border:solid 2px #fff;
-  box-shadow:0 0 14px rgba(0,0,0,0.3);
-  position:relative;
+  width: 800px;
+  height: 400px;
+  /*border: solid 2px #fff;
+  box-shadow: 0 0 14px rgba(0,0,0,0.3);*/
+  position: relative;
 }
 
 #carrouselContainer{
   align-items: center;
-  width:728px;
-  height:400px;
+  width: 728px;
+  height: 400px;
 }
 
 .button{
-  position:relative;
-  height: 50px;
-  width:50px;
-  cursor:pointer;
-  top:100px;
+  position: absolute;
+  height: 48px;
+  width: 48px;
+  cursor: pointer;
+  top: 175px;
+  opacity: 0.7;
 }
 
-#leftButton{
-  margin-right:10px;
-  opacity:0.5;
-  transform:rotate(90deg);
-  transition:all 0,4s;
+.leftButton{
+  margin-left:0;
+  /*transition: all 0,4s ease;*/
 }
 
-#rightButton{
-  margin-left: 10px;
-  opacity:0.5;
-  transform:rotate(270deg);
-  transition:all 0,4s;
+.rightButton{
+  margin-left: 690px;  
+  /*transition: all 0,4s ease;*/
 }
 
 #leftButton:hover{
-  transform:rotate(90deg) scale(1.2);
-  transition:all 0,4s;
-  opacity:1;
+  transform: scale(1.2);
+  transition: all 0,4s ease;
+  opacity: 1;
 }
 
 #rightButton:hover{
-  transform:rotate(270deg) scale(1.2);
-  transition:all 0,4s;
-  opacity:1;
+  transform: scale(1.2);
+  transition: all 0,4s ease;
+  opacity: 1;
 }
 
 .footer{
-  height:30px;
+  height: 30px;
 }
