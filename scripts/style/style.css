@@ -19,6 +19,10 @@
 
 #header{
   display: flex;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 100;
   font-family: Verdana;
   background-color: rgb(98, 117, 132);
   color: rgb(184, 187, 190);
@@ -127,7 +131,7 @@
   cursor: pointer;
   top: 175px;
   opacity: 0.7;
-  z-index:1;
+  z-index:2;
 }
 
 .leftarrow{
@@ -160,16 +164,21 @@
 /* Modal Box Style hidden by default */
 .modal{
   display: flex;
-  position:absolute;
-  background-color:rgba(147, 201, 235, 0.645);
-  z-index:1;
+  position: fixed;
+  /*background-color:rgba(147, 201, 235, 0.645);*/
+  /*z-index:1;*/
   top: 50%;
-  left: 50%;
-  width: 80%;
-  height: 536px;
-  align-items: center;
-  align-content: center;
+  left: 1293px;
+  width: 504px;
+  height: 672px;
+  z-index: 1;
+  /*align-items: center;*/
+  /*align-content: center;*/
 }
+
+/*#modal-image {
+  max-width: 50%;
+}*/
 
 .image-modal-trigger{
   cursor:pointer;
@@ -178,14 +187,24 @@
 }
 
 .image-modal-trigger:hover {
+  display: block;
+  background-color: white;
+  border: inherit;
   opacity:1.0;
 }
 
 #image-modal{
   display: flex;
+  align-items: center;
+  width: 672px;
+  height: 544px;
 }
 
-.modal .ul{
+#close-modal{
+  opacity: inherit;
+}
+
+#imageInfo{
   position:fixed;
   margin-left:20px; 
   padding:0; 
@@ -195,6 +214,7 @@
 .li{
 margin-bottom:5px;
 }
+
 
 .closeButton{
   position: absolute;

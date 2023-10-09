@@ -25,6 +25,8 @@ function createButton(parentElement) {
 
 function createInformationList(imageInformation, filmData) {
     //prepare list information to display in Modal Windows
+    
+    console.log('Données Film : ', filmData);
     imageInformation.id = 'imageInfo';
     let informationList = [];
     informationList.push([`Titre du film     :  ${filmData.title}`]);
@@ -34,6 +36,9 @@ function createInformationList(imageInformation, filmData) {
     informationList.push([`Score imdb        :  ${filmData.imdb_score}`]);
     informationList.push([`Réalisateur       :  ${filmData.directors}`]);
     informationList.push([`Liste des acteurs :  ${filmData.actors}`]);
+    informationList.push([`Description       :  ${filmData.description}`]);
+    informationList.push([`Durée             :  ${filmData.duration} minutes`]);
+    
     return informationList;
 };
 
@@ -139,7 +144,6 @@ function modalClose() {
 function modalCreation(imageDiv, filmData) {
     /*Modal Event actions*/
 
-    console.log('FilmData : ', filmData);
     const modalDiv = document.getElementById("image-modal"); //Select Div Modal
     const imageInModal = document.getElementById("modal-image"); //Select image inside Modal
     const elementUl = document.getElementById('imageInfo');
@@ -298,7 +302,7 @@ function createContainerDiv(categoryFilms, videoTitle) {
     };
 };
 
-function createImage(categoryFilms, filmData=[], indexList) {
+function createImage(categoryFilms, filmData='', indexList) {
     //create a div to display image film, get data to exploit in modal view
 
     const modalDiv = document.getElementById("image-modal"); //Select Div Modal
@@ -353,11 +357,23 @@ let bestFilm = getData(url);
 bestFilm.then((jsonData) => {
     let nextUrl = jsonData.next;
     let dataArray = jsonData.results;
-    createImage('numberOne', dataArray[0]);
+    let detailedUrl = `${urlHref}${titlesPathEndPoint}${dataArray[0].id}`;
+    let detailedBestFilm = getData(detailedUrl);
+    detailedBestFilm.then((detailedData) => {
+        //let detailedJsonData = jsonData;
+        console.log('jsonDetailedData : ', detailedData);
+        //console.log('titre du film :', detailedDataArray.title);
+        createImage('numberOne', detailedData);
+    });    
+    
     //console.log('dataArray0 :', dataArray);
     for (index = 1; index < dataArray.length; index++) {
-        createImage('bestFilms', dataArray[index]);
-        //console.log('display image : ', dataArray);
+        detailedUrl = `${urlHref}${titlesPathEndPoint}${dataArray[index].id}`;
+        detailedBestFilm = getData(detailedUrl);
+        detailedBestFilm.then((detailedData) => {
+            //let detailedJsonData = jsonData;
+            createImage('bestFilms', detailedData);
+        });        
     };
     bestFilm = getData(nextUrl);
     bestFilm.then((jsonData) => {
@@ -374,25 +390,37 @@ let index = 0;
 for (indexList = 2; indexList < categoryList.length; indexList++) {
     let category = categoryList[indexList];
     let url = `${urlHref}${titlesPathEndPoint}?genre=${category}&sort_by=-imdb_score`;
-    let film = getData(url);
-    film.then((jsonData) => {
+    let dataFilm = getData(url);
+    dataFilm.then((jsonData) => {
         let nextUrl = jsonData.next;
         let dataArray = jsonData.results;
         //console.log('jsonData',  dataArray);
         for (index = 0; index < dataArray.length; index++) {
-            createImage(category, dataArray[index]);
+            let detailedUrl = `${urlHref}${titlesPathEndPoint}${dataArray[index].id}`;
+            let detailedFilm = getData(detailedUrl);
+            detailedFilm.then((detailedData) => {
+                //let detailedJsonData = jsonData;
+                createImage(category, detailedData);
+            });        
+        //createImage(category, dataArray[index]);
             //console.log('display image : ', dataArray);
-        }
+        };
         let film = getData(nextUrl);
         film.then((jsonData) => {
             dataArray = jsonData.results;
             for (index = 0; index < numberOfFilms-5; index++) {
-                createImage(category, dataArray[index]);
-                //console.log('display image : ', dataArray);
+                let detailedUrl = `${urlHref}${titlesPathEndPoint}${dataArray[index].id}`;
+                let detailedFilm = getData(detailedUrl);
+                detailedFilm.then((detailedData) => {
+                    //let detailedJsonData = jsonData;
+                    createImage(category, detailedData);
+                });
+            
+    displayHideArrows(0, numberOfFilms, category);
             };
         });
         //hide left arrow at first launch
-        displayHideArrows(0, numberOfFilms, category);
+        
     });
 };
 
