@@ -14,7 +14,6 @@ const numberOfFilms = 7;
 function createInformationList(imageInformation, filmData) {
     //create data in <ul> for modal image information
 
-    console.log('Données Film : ', filmData);
     let dataElement = document.createElement('li');
     dataElement.textContent = `Titre du film            :  ${filmData.title}`;
     imageInformation.appendChild(dataElement);
@@ -124,6 +123,17 @@ function modalCreate(imageDiv, filmData) {
         imageDiv.id = 'imageDiv';
         modalImageDiv.appendChild(imageDiv);
         const image = document.createElement('img');
+        image.src = filmData.image_url;
+        image.id = filmData.id;
+        image.alt = `Titre du livre : ${filmData.title}`;
+        image.onload = () => {
+            image.style.backgroundImage = `url(${image.src})`;  
+        };
+        //set default image if image load in error
+        image.onerror = () => {
+            image.src = "images/buildings.jpg";
+            image.alt = `Titre du livre : ${filmData.title}`;
+        };
         if (!filmData.image_url) {
             image.setAttribute("src", "images/buildings.jpg");
         } else {
@@ -141,16 +151,13 @@ function modalCreate(imageDiv, filmData) {
         modalDiv.style.display = "block"; // modal windows display On
         // Modal Events close actions on the whole modal Window
         /*modalDiv.addEventListener("click", () => {
-            console.log('ligne178 modalClose');
                 modalClose();
         });*/
         let closeButton = document.getElementById('close-modal')
         closeButton.addEventListener("click", () => {
-            console.log('ligne182 modalClose');
             modalClose();
         });
         window.addEventListener("click", (event) => {
-            console.log('ligne187 modalClose');
             if (event.target === modalDiv) {
                 //modalClose(imageInModal, modalDiv);
                 modalClose();
@@ -315,7 +322,7 @@ async function getData(url) {
 //Main program part
 
 let url = `${urlHref}${titlesPathEndPoint}?sort_by=-imdb_score`;
-console.log('start');
+
 //hide earlier Modal construction
 let hideModal = document.getElementById('modalDiv');
 hideModal.style.display = "none";
@@ -326,7 +333,6 @@ bestFilm.then((jsonData) => {
     let detailedUrl = `${urlHref}${titlesPathEndPoint}${dataArray[0].id}`;
     let detailedBestFilm = getData(detailedUrl);
     detailedBestFilm.then((detailedData) => {
-        console.log('jsonDetailedData : ', detailedData);
         createImage('numberOne', detailedData);
     });    
     
