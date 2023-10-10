@@ -211,7 +211,7 @@
 
 #close-modal{
   opacity: inherit;
-  scale: 50%;
+  /*scale: 50%;*/
 }
 
 #imageDiv{
@@ -220,7 +220,7 @@
 
 #imageInfo{
   width: inherit;
-  text-wrap: wrap;
+  /*text-wrap: wrap;*/
 }
 
 .li{
