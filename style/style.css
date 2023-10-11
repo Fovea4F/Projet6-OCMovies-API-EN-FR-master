@@ -46,8 +46,8 @@
 
 .containerimages{
   display: flex;
-  border:solid 1px #470606;
-  box-shadow: 0 0 12px rgba(0,0,0,0.2);
+  /*border:solid 1px #470606;*/
+  /*box-shadow: 0 0 12px rgba(0,0,0,0.2);*/
 }
 
 #filmTitle{
@@ -172,6 +172,7 @@
   opacity: 1.0;
   border: 1px solid #222222;
   padding: 10px;
+  overflow: hidden;
 }
 
 #modalDiv {
@@ -211,7 +212,6 @@
 
 #close-modal{
   opacity: inherit;
-  /*scale: 50%;*/
 }
 
 #imageDiv{
@@ -220,7 +220,6 @@
 
 #imageInfo{
   width: inherit;
-  /*text-wrap: wrap;*/
 }
 
 .li{

@@ -12,9 +12,11 @@ data/
 data/movies.db.zip
 docs/
 env/
-movies
+livrables/
+movies/
 movies/*.*
 tests/
+
 .gitignore.old
 db.sqlite3
 manage.py
