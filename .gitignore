@@ -27,3 +27,4 @@ setup.cfg
 *.zip
 *.bkp
 mintty.exe.stackdump
+.gitignore
