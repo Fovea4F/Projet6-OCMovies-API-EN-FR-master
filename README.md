@@ -17,7 +17,7 @@ A la fin de ce déploiement, un mini serveur web est ouvert sur le port 8000 de 
 **Le déploiement** est une extraction par décompression, de l'ensemble des données de ce dernier **.zip** à la racine du projet précédemment déployé.
     -   **scripts/** contient le fichier Javascript en charge de la dynamique du site.
     -   **style/** contient la partie CSS.
-    -   **images/** permet de rassembler les différentes imges ou icônes utilisées dans cet exercice.
+    -   **images/** permet de rassembler les différentes images ou icônes utilisées dans cet exercice.
     -   Enfin, le fichier **index.html** est la racine de notre site, c'est lui que vous devrez exécuter sur votre explorateur Web préféré.
 
 Il n'y a donc pas de fichier requirements.txt inutile dans cet exercice.
