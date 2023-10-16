@@ -12,7 +12,6 @@ data/
 data/movies.db.zip
 docs/
 env/
-livrables/
 movies/
 movies/*.*
 tests/
